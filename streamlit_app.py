@@ -36,8 +36,6 @@ selected_usertype = st.radio(
         index=None,
         key='user_radio'
     )
-st.write(f'the selected user is: {selected_usertype}')
-
 
 with st.form("form1", clear_on_submit = True):
     #requestType = st.empty()
