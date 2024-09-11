@@ -24,9 +24,9 @@ User_Values = get_sf_dropdown_values(sql)
 # close snowflake connection
 conn.close()
 
-addFunctionalRoleToUser = st.radio(
-        "Add functional role(s) to ",
-        ["svc", "Individual User"],        
+selected_usertype = st.radio(
+        "Add functional/project role(s) to ",
+        ["Service Account", "Individual User"],        
         index=None,
         key='user_radio'
     )
@@ -47,7 +47,6 @@ with st.form("form1", clear_on_submit = True):
         "Environment(s)",
         ["DEV", "TST", "PRD"],
     )
-    st.write(f'the selected value is :{environments}')
 
     # TODO - need to fix conditional logic using st.empty https://discuss.streamlit.io/t/can-i-add-to-a-selectbox-an-other-option-where-the-user-can-add-his-own-answer/28525/5
 
@@ -60,13 +59,21 @@ with st.form("form1", clear_on_submit = True):
         help="Choose functional roles you'd like to add to your current access"
     )
 
-    if addFunctionalRoleToUser == 'svc':
+    if selected_usertype == 'svc':
         UserValues = col2.selectbox(
             "Choose a user",
             (Svc_User_Values),
             index=None,
             placeholder="user you'd like to add the additional access",
             help="Choose a user that you'd like to add the additional access"
+        )
+    else
+        UserValues = col2.selectbox(
+        "Choose a user",
+        (User_Values),
+        index=None,
+        placeholder="user you'd like to add the additional access",
+        help="Choose a user that you'd like to add the additional access"
         )
 
     reasonForRequest = st.text_area(
