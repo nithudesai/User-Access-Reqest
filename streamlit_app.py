@@ -89,7 +89,7 @@ with st.form("form1", clear_on_submit = True):
         st.header('Form Responses')
         st.write("Snowflake Account: ", snowflakeAccount)
         st.write("Environment(s): ", environments)
-        st.write("Type of Request: ", requestType)
+        st.write(f'the selected user is:{selected_usertype}')
         # TODO add role options 
     
-        st.write("Reason for Request: ", reasonForRequest)
+        st.write("Business justification: ", reasonForRequest)
