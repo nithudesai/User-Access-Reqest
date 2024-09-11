@@ -15,7 +15,10 @@ conn = snowflake.connector.connect(**st.secrets["snowflake"])
 sql = "select name from PRJ_ROLES UNION SELECT name from FR_ROLES"
 FR_PR_Values = get_sf_dropdown_values(sql)
 
-sql = "select name from users_tbl"
+sql = "select name from users_tbl where name ilike 'SVC%'"
+Svc_User_Values = get_sf_dropdown_values(sql)
+
+sql = "select name from users_tbl where name not ilike 'SVC%'"
 User_Values = get_sf_dropdown_values(sql)
 
 # close snowflake connection
@@ -23,7 +26,7 @@ conn.close()
 
 addFunctionalRoleToUser = st.radio(
         "Add functional role(s) to ",
-        ["Service Account", "Individual User"],        
+        ["svc", "Individual User"],        
         index=None,
         key='user_radio'
     )
