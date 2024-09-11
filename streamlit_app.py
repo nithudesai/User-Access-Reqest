@@ -36,7 +36,7 @@ selected_usertype = st.radio(
         index=None,
         key='user_radio'
     )
-st.write(f'the selected user is:{selected_usertype}')
+st.write(f'the selected user is: {selected_usertype}')
 
 
 with st.form("form1", clear_on_submit = True):
@@ -103,8 +103,9 @@ with st.form("form1", clear_on_submit = True):
     if submit:
         st.header('Form Responses')
         st.write("Snowflake Account: ", snowflakeAccount)
-        st.write("Environment(s): ", str(environments)[1:-1])
-        st.write(f'the selected user is:{selected_usertype}')
+        st.write("Environment(s): ", str(environments))
+        st.write(f'The selected user type is: {selected_usertype}')
+        st.write(f'The selected user is: {UserValues}')
         # TODO add role options 
     
         st.write("Business justification: ", reasonForRequest)
