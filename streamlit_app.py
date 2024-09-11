@@ -60,13 +60,14 @@ with st.form("form1", clear_on_submit = True):
         help="Choose functional roles you'd like to add to your current access"
     )
 
-    UserValues = col2.selectbox(
-        "Choose a user",
-        (User_Values),
-        index=None,
-        placeholder="user you'd like to add the additional access",
-        help="Choose a user that you'd like to add the additional access"
-    )
+    if addFunctionalRoleToUser == 'svc':
+        UserValues = col2.selectbox(
+            "Choose a user",
+            (Svc_User_Values),
+            index=None,
+            placeholder="user you'd like to add the additional access",
+            help="Choose a user that you'd like to add the additional access"
+        )
 
     reasonForRequest = st.text_area(
         "Business justification",
