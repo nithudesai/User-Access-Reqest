@@ -67,7 +67,7 @@ with st.form("form1", clear_on_submit = True):
             placeholder="user you'd like to add the additional access",
             help="Choose a user that you'd like to add the additional access"
         )
-    else
+    else:
         UserValues = col2.selectbox(
         "Choose a user",
         (User_Values),
