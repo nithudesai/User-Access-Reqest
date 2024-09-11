@@ -1,11 +1,6 @@
 import streamlit as st
 import snowflake.connector
 
-st.title("🎈 My new app")
-st.write(
-    "Let's start building! For help and inspiration, head over [docs.streamlit.io](https://docs.streamlit.io/)."
-)
-
 # execute SF queries
 def get_sf_dropdown_values(sql):
     with conn.cursor() as cursor:
@@ -16,23 +11,18 @@ def get_sf_dropdown_values(sql):
 conn = snowflake.connector.connect(**st.secrets["snowflake"])
 
 # populate dropdown values from SF queries - TODO insert more queries
-sql = "select name from FR_ROLES"
-Func_Roles_Values = get_sf_dropdown_values(sql)
-
-sql = "select name from PRJ_ROLES"
-Prj_Roles_Values = get_sf_dropdown_values(sql)
 
 sql = "select name from PRJ_ROLES UNION SELECT name from FR_ROLES"
 FR_PR_Values = get_sf_dropdown_values(sql)
 
-sql = "select name from SVC_ROLES"
+sql = "select name from svc_roles"
 Svc_Roles_Values = get_sf_dropdown_values(sql)
 
 # close snowflake connection
 conn.close()
 
 # create form
-st.header('Snowflake Role Request Form')
+st.header('Snowflake User Access Request Form')
 with st.form("form1", clear_on_submit = True):
     #requestType = st.empty()
     snowflakeAccount = st.selectbox(
@@ -87,35 +77,23 @@ with st.form("form1", clear_on_submit = True):
 
     col1, col2 = st.columns(2)
 
-    FrRoleValues = col1.multiselect(
-        "Choose functional role(s)",
-        (Func_Roles_Values),
-        placeholder="roles you'd like to add to target project role",
-        help="Choose functional roles you'd like to add to your project role"
-    )
-
-    PrjRoleValues = col2.selectbox(
-        "Choose a target Project role",
-        (Prj_Roles_Values),
-        index=None,
-        placeholder="role you'd like to add the additional access",
-        help="Choose a target project tole that you'd like to add the additional access"
-    )
-
-    col3, col4 = st.columns(2)
-    FrPrRoleValues = col3.multiselect(
+    FrPrRoleValues = col1.multiselect(
         "Choose functional/project role(s)",
         (FR_PR_Values),
+        placeholder="roles you'd like to add to your current access",
+        help="Choose functional roles you'd like to add to your current access"
     )
 
-    SvcRoleValues = col4.selectbox(
-        "Choose a target Service Acct role",
-        (Svc_Roles_Values),
+    UserValues = col2.selectbox(
+        "Choose a user",
+        (User_Values),
         index=None,
+        placeholder="user you'd like to add the additional access",
+        help="Choose a user that you'd like to add the additional access"
     )
 
     reasonForRequest = st.text_area(
-        "Reason for Request",
+        "Business justification",
         "Please enter a brief description here",
     )
 
