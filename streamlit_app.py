@@ -31,7 +31,7 @@ conn.close()
 st.header('Snowflake User Access Request Form')
 
 selected_usertype = st.radio(
-        "Add functional/project role(s) to ",
+        "Add role(s) to",
         ["Service Account", "Individual User"],        
         index=None,
         key='user_radio'
