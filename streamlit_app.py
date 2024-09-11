@@ -15,8 +15,8 @@ conn = snowflake.connector.connect(**st.secrets["snowflake"])
 sql = "select name from PRJ_ROLES UNION SELECT name from FR_ROLES"
 FR_PR_Values = get_sf_dropdown_values(sql)
 
-sql = "select name from svc_roles"
-Svc_Roles_Values = get_sf_dropdown_values(sql)
+sql = "select name from users_tbl"
+User_Values = get_sf_dropdown_values(sql)
 
 # close snowflake connection
 conn.close()
@@ -46,34 +46,17 @@ with st.form("form1", clear_on_submit = True):
     if requestType:
         st.write(f'the selected value 2 is :{requestType}')
     # TODO - need to fix conditional logic using st.empty https://discuss.streamlit.io/t/can-i-add-to-a-selectbox-an-other-option-where-the-user-can-add-his-own-answer/28525/5
-    addFunctionalRoleToProjectRole = st.radio(
-        "Add functional role(s) to a project role?",
+    addFunctionalRoleToServiceAcct = st.radio(
+        "Add functional role(s) to a Service acct?",
         ["Yes", "No"],        
         index=None,
     )
 
-    addFunctionalRoleToServiceAccountRole = st.radio(
-        "Add functional/project role(s) to a service account role?",
+    addFunctionalRoleToUser = st.radio(
+        "Add functional/project role(s) to an individual user?",
         ["Yes", "No"],
         index=None,
     )
-
-    placeholder = st.empty()
-
-    if requestType == "Revoke":
-        st.write(f'the selected value 3 is :{requestType}')
-    #if requestType == "Revoke":
-    #    removeFunctionalRoleFromProjectRole = st.radio(
-    #    "Remove functional role(s) from project role(s)?",
-    #    ["Yes", "No"],
-    #    index=None,
-    #    )
-
-    #   removeFunctionalRoleFromServiceAccountRole = st.radio(
-    #    "Remove functional role(s) from service account role(s)?",
-    #    ["Yes", "No"],
-    #    index=None,
-    #    )
 
     col1, col2 = st.columns(2)
 
