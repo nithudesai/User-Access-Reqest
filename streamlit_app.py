@@ -56,7 +56,8 @@ with st.form("form1", clear_on_submit = True):
         "Choose functional/project role(s)",
         (FR_PR_Values),
         placeholder="roles you'd like to add to your current access",
-        help="Choose functional roles you'd like to add to your current access"
+        help="Choose functional roles you'd like to add to your current access",
+        default= None
     )
 
     if selected_usertype == 'Service Account':
