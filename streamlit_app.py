@@ -12,7 +12,7 @@ conn = snowflake.connector.connect(**st.secrets["snowflake"])
 
 # populate dropdown values from SF queries - TODO insert more queries
 
-sql = "select name from PRJ_ROLES UNION SELECT name from FR_ROLES"
+sql = "select name from PRJ_ROLES UNION SELECT name from FR_ROLES UNION SELECT 'OTHER' "
 FR_PR_Values = get_sf_dropdown_values(sql)
 
 sql = "select name from users_tbl where name ilike 'SVC%'"
@@ -24,6 +24,9 @@ User_Values = get_sf_dropdown_values(sql)
 # close snowflake connection
 conn.close()
 
+# create form
+st.header('Snowflake User Access Request Form')
+
 selected_usertype = st.radio(
         "Add functional/project role(s) to ",
         ["Service Account", "Individual User"],        
@@ -32,8 +35,7 @@ selected_usertype = st.radio(
     )
 st.write(f'the selected user is:{selected_usertype}')
 
-# create form
-st.header('Snowflake User Access Request Form')
+
 with st.form("form1", clear_on_submit = True):
     #requestType = st.empty()
     snowflakeAccount = st.selectbox(
