@@ -59,7 +59,7 @@ with st.form("form1", clear_on_submit = True):
         help="Choose functional roles you'd like to add to your current access"
     )
 
-    if selected_usertype == 'svc':
+    if selected_usertype == 'Service Account':
         UserValues = col2.selectbox(
             "Choose a user",
             (Svc_User_Values),
