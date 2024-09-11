@@ -30,7 +30,7 @@ selected_usertype = st.radio(
         index=None,
         key='user_radio'
     )
-st.write(f'the selected user is:{addFunctionalRoleToUser}')
+st.write(f'the selected user is:{selected_usertype}')
 
 # create form
 st.header('Snowflake User Access Request Form')
