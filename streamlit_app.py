@@ -103,7 +103,7 @@ with st.form("form1", clear_on_submit = True):
     if submit:
         st.header('Form Responses')
         st.write("Snowflake Account: ", snowflakeAccount)
-        st.write("Environment(s): ", environments)
+        st.write("Environment(s): ", str(environments)[1:-1])
         st.write(f'the selected user is:{selected_usertype}')
         # TODO add role options 
     
